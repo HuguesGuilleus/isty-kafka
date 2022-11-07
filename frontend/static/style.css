@@ -1,0 +1,35 @@
+body {
+	font-family: sans-serif;
+	font-size: x-large;
+	padding: 2ex;
+	max-width: 70ex;
+	margin: auto;
+	background: gainsboro;
+	color: black;
+}
+
+#output {
+	min-height: 80vh;
+}
+
+p {
+	border-left: solid 0.5ex dodgerblue;
+	padding: 1ex;
+}
+
+#inputZone {
+	display: grid;
+	grid-template-columns: 1fr auto;
+	grid-gap: 1ex;
+}
+
+input {
+	font: unset;
+}
+
+footer {
+	margin-top: 2ex;
+	font-size: smaller;
+	font-style: italic;
+	color: dimgrey;
+}

@@ -1,0 +1,33 @@
+@startuml
+
+node "Navigateur web" {
+	frame clientCode {
+		[index.js]
+	}
+}
+
+node "Serveur (linux)" {
+	component frontend
+	interface frontendHTTP
+	frontend - frontendHTTP
+	database "Kafka" {
+		interface "chatt-input"
+		interface "chatt-output"
+	}
+	component stream
+
+	frontend -down-> [chatt-input]
+	frontend <-up- [chatt-output]
+
+	[chatt-input] -down-> stream
+	stream -up-> [chatt-output]
+}
+
+[frontendHTTP] .up.> clientCode
+[index.js] --> [frontendHTTP] : Post
+[frontendHTTP] --> [index.js] : EventSource
+
+@enduml
+
+
+[page] - [index.js]
