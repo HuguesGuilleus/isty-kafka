@@ -8,26 +8,27 @@ node "Navigateur web" {
 
 node "Serveur (linux)" {
 	component frontend
-	interface frontendHTTP
-	frontend - frontendHTTP
+	interface http
+	frontend - http
 	database "Kafka" {
 		interface "chatt-input"
 		interface "chatt-output"
 	}
+	component zookeper
 	component stream
+
 
 	frontend -down-> [chatt-input]
 	frontend <-up- [chatt-output]
 
 	[chatt-input] -down-> stream
 	stream -up-> [chatt-output]
+
+	Kafka->zookeper
 }
 
-[frontendHTTP] .up.> clientCode
-[index.js] --> [frontendHTTP] : Post
-[frontendHTTP] --> [index.js] : EventSource
+[http] .up.> clientCode
+[index.js] --> [http] : Post
+[http] --> [index.js] : EventSource
 
 @enduml
-
-
-[page] - [index.js]
